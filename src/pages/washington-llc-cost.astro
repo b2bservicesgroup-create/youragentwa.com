@@ -1,0 +1,88 @@
+---
+import GuidePage from '../components/GuidePage.astro';
+
+const faqs = [
+  { q: 'How much does it cost to start an LLC in Washington?', a: 'The state filing fee for the Certificate of Formation is $200 online ($180 plus a $20 online processing fee). Most LLCs also file a Business License Application ($50) and at least one trade name ($5), for about $255 in state fees before any city licenses or endorsements.' },
+  { q: 'How much is the Washington LLC annual report?', a: 'The annual report fee is $70 and is due by the last day of the month your LLC was formed, every year. If it is late, a $25 delinquency fee applies, for $95 total.' },
+  { q: 'Does Washington have a state income tax for LLCs?', a: 'Washington has no personal or corporate income tax. Instead, most businesses pay Business & Occupation (B&O) tax on gross receipts and collect sales tax where it applies. Your business license registers you for these taxes.' },
+  { q: 'Is the $400 B2B Solutions price really all-in?', a: 'For a basic Washington LLC, yes. It includes the $200 Certificate of Formation fee, the Business License Application fee, one trade name and your EIN. City licenses, state endorsements and specialty licenses are extra, at the actual government fee.' },
+];
+---
+
+<GuidePage
+  slug="washington-llc-cost"
+  title="How Much Does an LLC Cost in Washington State?"
+  description="Washington LLC costs for 2026: $200 to file the Certificate of Formation online, $50 business license application, $5 per trade name and a $70 annual report. Full fee table and budget."
+  eyebrow="Washington LLC costs"
+  intro="Expect about $255 in state fees to form a basic Washington LLC and get licensed, plus $70 a year to keep it active. Here is every fee, where it goes and what people forget to budget for."
+  updated="November 2026"
+  faqs={faqs}
+>
+  <h2>One-time costs to form your LLC</h2>
+  <div class="not-prose overflow-x-auto rounded-[18px] border border-[#E3ECF7] my-6">
+    <table class="w-full min-w-[520px] text-left border-collapse text-base">
+      <thead>
+        <tr class="bg-sky2">
+          <th class="p-4 font-heading text-navy">Fee</th>
+          <th class="p-4 font-heading text-navy">Paid to</th>
+          <th class="p-4 font-heading text-navy text-right">Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-t border-[#E3ECF7]"><td class="p-4">Certificate of Formation (online)</td><td class="p-4 text-muted">Secretary of State</td><td class="p-4 text-right font-semibold text-navy">$200</td></tr>
+        <tr class="border-t border-[#E3ECF7]"><td class="p-4">Initial Report (filed with the Certificate)</td><td class="p-4 text-muted">Secretary of State</td><td class="p-4 text-right font-semibold text-navy">$0</td></tr>
+        <tr class="border-t border-[#E3ECF7]"><td class="p-4">Business License Application</td><td class="p-4 text-muted">Department of Revenue</td><td class="p-4 text-right font-semibold text-navy">$50</td></tr>
+        <tr class="border-t border-[#E3ECF7]"><td class="p-4">Trade name (DBA), each</td><td class="p-4 text-muted">Department of Revenue</td><td class="p-4 text-right font-semibold text-navy">$5</td></tr>
+        <tr class="border-t border-[#E3ECF7]"><td class="p-4">EIN</td><td class="p-4 text-muted">IRS</td><td class="p-4 text-right font-semibold text-navy">$0</td></tr>
+        <tr class="border-t border-[#E3ECF7]"><td class="p-4">City license / state endorsements</td><td class="p-4 text-muted">Varies</td><td class="p-4 text-right font-semibold text-navy">Varies</td></tr>
+        <tr class="border-t-2 border-navy bg-sky2"><td class="p-4 font-heading font-extrabold text-navy" colspan="2">Typical state fees to get started</td><td class="p-4 text-right font-heading font-extrabold text-navy text-xl">$255</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Filing the Certificate of Formation by mail costs $180 instead of $200, but it takes longer to process.
+  </p>
+
+  <h2>Ongoing costs to keep your LLC active</h2>
+  <div class="not-prose overflow-x-auto rounded-[18px] border border-[#E3ECF7] my-6">
+    <table class="w-full min-w-[520px] text-left border-collapse text-base">
+      <thead>
+        <tr class="bg-sky2">
+          <th class="p-4 font-heading text-navy">Fee</th>
+          <th class="p-4 font-heading text-navy">When</th>
+          <th class="p-4 font-heading text-navy text-right">Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-t border-[#E3ECF7]"><td class="p-4">Annual report</td><td class="p-4 text-muted">Every year, by the end of your formation month</td><td class="p-4 text-right font-semibold text-navy">$70</td></tr>
+        <tr class="border-t border-[#E3ECF7]"><td class="p-4">Late annual report</td><td class="p-4 text-muted">After the due date</td><td class="p-4 text-right font-semibold text-navy">$95</td></tr>
+        <tr class="border-t border-[#E3ECF7]"><td class="p-4">City license renewals</td><td class="p-4 text-muted">Set by your city</td><td class="p-4 text-right font-semibold text-navy">Varies</td></tr>
+        <tr class="border-t border-[#E3ECF7]"><td class="p-4">Registered agent service (optional)</td><td class="p-4 text-muted">Yearly, if you hire one</td><td class="p-4 text-right font-semibold text-navy">Varies</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Miss your annual report long enough and the state can administratively dissolve your LLC. Getting reinstated costs $140 plus every annual report fee you missed, so it pays to put the date on your calendar.
+  </p>
+
+  <h2>Costs people forget to budget for</h2>
+  <ul>
+    <li><strong>City business licenses.</strong> Many Washington cities require their own license, added to your state application with a fee set by the city.</li>
+    <li><strong>State endorsements.</strong> Contractors, food businesses and other regulated industries need extra licensing.</li>
+    <li><strong>Washington taxes.</strong> There's no state income tax, but most businesses pay B&amp;O tax on gross receipts and may collect sales tax.</li>
+    <li><strong>Bookkeeping.</strong> Clean books from day one make taxes and loans much easier. See <a href="https://washingtonbookkeeper.com/pricing">bookkeeping plans for Washington businesses</a>.</li>
+  </ul>
+
+  <h2>What national formation services really cost</h2>
+  <p>
+    Many online services advertise a low starting price, then add the $200 state fee at checkout. Most don't file your Washington Business License Application or trade name at all, which leaves you with an LLC that isn't licensed to do business yet. <a href="/#compare">See our side-by-side comparison</a>.
+  </p>
+
+  <h2>Our price: $400 flat, state fees included</h2>
+  <p>
+    B2B Solutions forms a basic Washington LLC for <strong>$400 all-in</strong>: the $200 Certificate of Formation fee, the Business License Application, one trade name and your EIN, filed by a local team in Rochester, WA. No yearly subscription. <a href="/llc">Start your LLC</a>.
+  </p>
+  <p class="text-base text-muted">
+    Fees are from the Washington Secretary of State and Department of Revenue fee schedules as of November 2026 and can change. This guide is general information, not legal or tax advice.
+  </p>
+</GuidePage>

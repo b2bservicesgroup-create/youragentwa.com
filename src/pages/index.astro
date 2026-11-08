@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { guides } from '../data/guides';
 
 const bookingURL = 'https://b2bservicesgroup.zohobookings.com/#/b2bservicesgroup';
 const startURL = '/llc';
@@ -72,9 +73,20 @@ const faqs = [
   { q: 'Do you form LLCs outside Washington?', a: 'Not at this time. Our LLC formation service is for Washington businesses only.' },
   { q: 'What happens after my LLC is formed?', a: 'You get your formation documents, business license, EIN and a checklist of next steps. B2B Solutions can also help with bookkeeping, payroll and HR as your business grows.' },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
 <Layout title="Washington LLC Formation for $400 Flat">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <Header />
 
   <main>
@@ -283,6 +295,28 @@ const faqs = [
               <h3 class="font-heading text-xl text-navy">{step.title}</h3>
               <p class="text-muted">{step.body}</p>
             </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Guides -->
+    <section id="guides" class="bg-white scroll-mt-24">
+      <div class="max-w-6xl mx-auto px-6 pt-20 md:pt-24 flex flex-col gap-10">
+        <div class="flex flex-wrap gap-4 justify-between items-end">
+          <div class="max-w-2xl flex flex-col gap-4">
+            <div class="text-accent font-bold text-sm tracking-widest uppercase">Washington LLC guides</div>
+            <h2 class="font-heading font-extrabold text-3xl md:text-[44px] leading-tight text-navy">Know what you're signing up for</h2>
+          </div>
+          <a href="/guides" class="font-bold text-lg text-accent no-underline hover:text-navy">All guides &rarr;</a>
+        </div>
+        <div class="grid gap-6 md:grid-cols-3">
+          {guides.map((g) => (
+            <a href={`/${g.slug}`} class="no-underline text-ink bg-sky2 rounded-[18px] p-7 flex flex-col gap-3 border border-transparent hover:border-[#9CC3F5] transition-colors">
+              <h3 class="font-heading text-xl text-navy">{g.short}</h3>
+              <p class="text-muted">{g.blurb}</p>
+              <span class="font-bold text-accent mt-auto">Read the guide &rarr;</span>
+            </a>
           ))}
         </div>
       </div>

@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { guides } from '../data/guides';
+---
+
+<Layout
+  title="Washington LLC Guides"
+  description="Plain-language guides to forming and running an LLC in Washington State: the steps, the state fees and trade names (DBA). From B2B Solutions in Rochester, WA."
+>
+  <Header />
+  <main>
+    <section class="bg-sky">
+      <div class="max-w-6xl mx-auto px-6 py-16 md:py-20 flex flex-col gap-4 max-w-3xl">
+        <div class="text-accent font-bold text-sm tracking-widest uppercase">Guides</div>
+        <h1 class="font-heading font-extrabold text-[40px] md:text-[56px] leading-[1.05] text-navy tracking-tight">Washington LLC guides</h1>
+        <p class="text-muted text-xl">Straight answers about forming an LLC in Washington State, written by the local team that files them.</p>
+      </div>
+    </section>
+    <section class="bg-white">
+      <div class="max-w-6xl mx-auto px-6 py-16 md:py-20 grid gap-6 md:grid-cols-3">
+        {guides.map((g) => (
+          <a href={`/${g.slug}`} class="no-underline text-ink bg-sky2 rounded-[18px] p-7 flex flex-col gap-3 border border-transparent hover:border-[#9CC3F5] transition-colors">
+            <h2 class="font-heading text-xl text-navy">{g.title}</h2>
+            <p class="text-muted">{g.blurb}</p>
+            <span class="font-bold text-accent mt-auto">Read the guide &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </section>
+    <section class="bg-accent text-white">
+      <div class="max-w-4xl mx-auto px-6 py-16 flex flex-col gap-5 items-center text-center">
+        <h2 class="font-heading font-extrabold text-3xl md:text-[42px] leading-tight">Rather we just handle it?</h2>
+        <p class="text-xl text-[#EAF3FF] max-w-xl">Your Washington LLC for $400 flat, state fees included.</p>
+        <a href="/llc" class="bg-white text-navy no-underline font-bold px-8 py-4 rounded-full text-lg hover:bg-sky2 transition-colors">Start your LLC</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

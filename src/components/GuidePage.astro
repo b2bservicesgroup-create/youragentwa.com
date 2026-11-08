@@ -1,0 +1,154 @@
+---
+// Shared template for the YourAgentWA.com guide pages.
+// Adds Article, FAQPage and BreadcrumbList schema, a sticky $400 CTA card and related-guide links.
+import Layout from '../layouts/Layout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import { guides } from '../data/guides';
+
+interface FAQ { q: string; a: string }
+interface Props {
+  slug: string;
+  title: string;        // <title> and H1
+  description: string;  // meta description
+  eyebrow: string;
+  intro: string;
+  updated: string;      // e.g. "November 2026"
+  faqs?: FAQ[];
+}
+
+const { slug, title, description, eyebrow, intro, updated, faqs = [] } = Astro.props;
+const siteURL = 'https://youragentwa.com';
+const pageURL = `${siteURL}/${slug}`;
+const startURL = '/llc';
+const bookingURL = 'https://b2bservicesgroup.zohobookings.com/#/b2bservicesgroup';
+const related = guides.filter((g) => g.slug !== slug);
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  url: pageURL,
+  mainEntityOfPage: pageURL,
+  author: { '@type': 'Organization', name: 'B2B Solutions', url: siteURL },
+  publisher: { '@type': 'Organization', name: 'B2B Solutions', url: siteURL },
+  image: `${siteURL}/og-image.png`,
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: siteURL },
+    { '@type': 'ListItem', position: 2, name: 'Guides', item: `${siteURL}/guides` },
+    { '@type': 'ListItem', position: 3, name: title, item: pageURL },
+  ],
+};
+
+const faqSchema = faqs.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    }
+  : null;
+---
+
+<Layout title={title} description={description} ogType="article">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  {faqSchema && <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+
+  <Header />
+
+  <main>
+    <!-- Hero -->
+    <section class="bg-sky">
+      <div class="max-w-6xl mx-auto px-6 pt-10 pb-14 md:pt-12 md:pb-16 flex flex-col gap-5">
+        <nav aria-label="Breadcrumb" class="text-sm text-muted">
+          <a href="/" class="text-accent no-underline hover:text-navy">Home</a>
+          <span class="mx-2">/</span>
+          <a href="/guides" class="text-accent no-underline hover:text-navy">Guides</a>
+        </nav>
+        <div class="max-w-3xl flex flex-col gap-4">
+          <div class="text-accent font-bold text-sm tracking-widest uppercase">{eyebrow}</div>
+          <h1 class="font-heading font-extrabold text-[36px] md:text-[52px] leading-[1.08] text-navy tracking-tight">{title}</h1>
+          <p class="text-muted text-xl">{intro}</p>
+          <div class="text-sm text-muted">Updated {updated} &middot; By the B2B Solutions team, Rochester, WA</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Body -->
+    <section class="bg-white">
+      <div class="max-w-6xl mx-auto px-6 py-14 md:py-16 flex flex-wrap gap-12 items-start">
+        <article class="flex-[2] min-w-[300px] prose prose-lg max-w-none
+          prose-headings:font-heading prose-headings:text-navy prose-headings:font-extrabold
+          prose-h2:text-[30px] prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl
+          prose-a:text-accent prose-a:font-semibold prose-strong:text-navy
+          prose-table:text-base prose-th:text-navy prose-th:bg-sky2 prose-th:px-4 prose-th:py-3 prose-td:px-4 prose-td:py-3
+          prose-li:my-1 text-ink [&>*:first-child]:mt-0">
+          <slot />
+        </article>
+
+        <!-- Sidebar CTA -->
+        <aside class="flex-1 min-w-[280px] lg:sticky lg:top-32 flex flex-col gap-5">
+          <div class="bg-navy text-white rounded-[20px] p-7 flex flex-col gap-4 shadow-[0_20px_50px_rgba(0,64,120,0.18)]">
+            <div class="text-[#8EC2FF] font-bold text-sm tracking-widest uppercase">Skip the paperwork</div>
+            <div class="font-heading font-extrabold text-2xl leading-tight">Your Washington LLC, done for you</div>
+            <div class="font-heading font-extrabold text-5xl">$400 <span class="text-lg font-bold text-[#D6E4F5]">flat</span></div>
+            <ul class="flex flex-col gap-2 text-[#D6E4F5] text-base">
+              <li>&#10003; $200 state filing fee included</li>
+              <li>&#10003; Business license application</li>
+              <li>&#10003; One trade name (DBA)</li>
+              <li>&#10003; EIN from the IRS</li>
+            </ul>
+            <a href={startURL} class="bg-white text-navy text-center no-underline font-bold px-6 py-3.5 rounded-full hover:bg-sky transition-colors">Start your LLC</a>
+            <a href={bookingURL} class="text-center text-white no-underline font-bold px-6 py-3 rounded-full border-2 border-white hover:bg-white/10 transition-colors">Free consultation</a>
+          </div>
+          <div class="bg-sky2 rounded-[18px] p-6 flex flex-col gap-3">
+            <div class="font-heading font-bold text-navy">More Washington LLC guides</div>
+            {related.map((g) => (
+              <a href={`/${g.slug}`} class="text-accent font-semibold no-underline hover:text-navy">{g.short} &rarr;</a>
+            ))}
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    {faqs.length > 0 && (
+      <section class="bg-sky">
+        <div class="max-w-3xl mx-auto px-6 py-16 md:py-20 flex flex-col gap-8">
+          <h2 class="font-heading font-extrabold text-3xl md:text-[40px] leading-tight text-navy text-center">Common questions</h2>
+          <div class="flex flex-col gap-3.5">
+            {faqs.map((f) => (
+              <div class="bg-white rounded-2xl px-7 py-6">
+                <h3 class="font-heading text-xl text-navy mb-2">{f.q}</h3>
+                <p class="text-muted">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- CTA -->
+    <section class="bg-accent text-white">
+      <div class="max-w-4xl mx-auto px-6 py-16 md:py-20 flex flex-col gap-5 items-center text-center">
+        <h2 class="font-heading font-extrabold text-3xl md:text-[42px] leading-tight">Ready to make it official?</h2>
+        <p class="text-xl text-[#EAF3FF] max-w-xl">We form Washington LLCs for $400 flat, state fees included. Real people in Rochester, WA.</p>
+        <div class="flex flex-wrap gap-3.5 justify-center">
+          <a href={startURL} class="bg-white text-navy no-underline font-bold px-8 py-4 rounded-full text-lg hover:bg-sky2 transition-colors">Start your LLC</a>
+          <a href="tel:3605292672" class="bg-transparent text-white no-underline font-bold px-8 py-4 rounded-full text-lg border-2 border-white hover:bg-white/10 transition-colors">Call 360-529-2672</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
