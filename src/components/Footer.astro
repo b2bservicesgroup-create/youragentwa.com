@@ -13,11 +13,12 @@ const year = new Date().getFullYear();
       <div class="flex flex-col gap-2">
         <div class="font-bold text-white">LLC formation</div>
         <a href="/llc" class="text-[#D6E4F5] no-underline hover:text-white">Start your LLC</a>
-        <a href="/#top" class="text-[#D6E4F5] no-underline hover:text-white">$400 flat-rate LLC</a>
-        <a href="/#compare" class="text-[#D6E4F5] no-underline hover:text-white">Compare &amp; save</a>
+        <a href="/" class="text-[#D6E4F5] no-underline hover:text-white">$400 flat-rate LLC</a>
+        <a href="/compare" class="text-[#D6E4F5] no-underline hover:text-white">Compare &amp; save</a>
         <a href="/washington-trade-name-dba" class="text-[#D6E4F5] no-underline hover:text-white">Trade names (DBA)</a>
-        <a href="/#services" class="text-[#D6E4F5] no-underline hover:text-white">EIN setup</a>
-        <a href="/#faq" class="text-[#D6E4F5] no-underline hover:text-white">FAQ</a>
+        <a href="/whats-included" class="text-[#D6E4F5] no-underline hover:text-white">What's included</a>
+        <a href="/how-it-works" class="text-[#D6E4F5] no-underline hover:text-white">How it works</a>
+        <a href="/faq" class="text-[#D6E4F5] no-underline hover:text-white">FAQ</a>
         <div class="font-bold text-white mt-3">Guides</div>
         {guides.map((g) => (
           <a href={`/${g.slug}`} class="text-[#D6E4F5] no-underline hover:text-white">{g.short}</a>

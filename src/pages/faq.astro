@@ -1,0 +1,41 @@
+---
+import SectionPage from '../components/SectionPage.astro';
+import { faqs } from '../data/site';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<SectionPage
+  slug="faq"
+  title="Washington LLC Formation FAQ"
+  description="Answers about our $400 Washington LLC formation: what the price includes, city licenses and endorsements, trade names (DBA) and what happens after filing."
+  eyebrow="Questions"
+  intro="Straight answers about forming your Washington LLC with us. Don't see your question? Call or text and a real person in Rochester, WA will answer."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <!-- FAQ -->
+  <section id="faq" class="bg-white scroll-mt-24">
+    <div class="max-w-3xl mx-auto px-6 py-20 md:py-24 flex flex-col gap-8">
+      <div class="flex flex-col gap-4 text-center">
+        <h2 class="font-heading font-extrabold text-3xl md:text-[44px] leading-tight text-navy">Frequently asked questions</h2>
+      </div>
+      <div class="flex flex-col gap-3.5">
+        {faqs.map((f) => (
+          <div class="bg-sky2 rounded-2xl px-7 py-6">
+            <h3 class="font-heading text-xl text-navy mb-2">{f.q}</h3>
+            <p class="text-muted">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</SectionPage>
