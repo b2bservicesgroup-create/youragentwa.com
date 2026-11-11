@@ -83,9 +83,23 @@ const faqSchema = {
     acceptedAnswer: { '@type': 'Answer', text: f.a },
   })),
 };
+
+// Tells Google which name to show above our results (the "site name").
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'YourAgentWA',
+  alternateName: ['YourAgentWA.com', 'Your Agent WA'],
+  url: 'https://youragentwa.com',
+};
 ---
 
-<Layout title="Washington LLC Formation for $400 Flat">
+<Layout
+  title="Washington LLC Formation for $400 Flat"
+  fullTitle="Form a Washington LLC for $400 Flat, State Fees Included"
+  description="One flat $400 covers your Washington LLC: the state filing fee, Certificate of Formation, business license, trade name and EIN. Local help in Rochester, WA."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <Header />
 

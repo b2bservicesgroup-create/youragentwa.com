@@ -9,7 +9,8 @@ import { guides } from '../data/guides';
 interface FAQ { q: string; a: string }
 interface Props {
   slug: string;
-  title: string;        // <title> and H1
+  title: string;        // H1 (and <title> unless seoTitle is set)
+  seoTitle?: string;    // optional <title> written for search results
   description: string;  // meta description
   eyebrow: string;
   intro: string;
@@ -17,7 +18,7 @@ interface Props {
   faqs?: FAQ[];
 }
 
-const { slug, title, description, eyebrow, intro, updated, faqs = [] } = Astro.props;
+const { slug, title, seoTitle, description, eyebrow, intro, updated, faqs = [] } = Astro.props;
 const siteURL = 'https://youragentwa.com';
 const pageURL = `${siteURL}/${slug}`;
 const startURL = '/llc';
@@ -59,7 +60,7 @@ const faqSchema = faqs.length
   : null;
 ---
 
-<Layout title={title} description={description} ogType="article">
+<Layout title={title} fullTitle={seoTitle} description={description} ogType="article">
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   {faqSchema && <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}

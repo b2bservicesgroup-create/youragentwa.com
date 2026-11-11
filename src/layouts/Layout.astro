@@ -1,20 +1,30 @@
 ---
 interface Props {
   title: string;
+  /** Full <title> override, used verbatim. */
+  fullTitle?: string;
   description?: string;
   ogType?: 'website' | 'article';
 }
 
 const {
   title,
+  fullTitle: fullTitleOverride,
   description = "Form your Washington LLC for one flat $400, state fees included. Certificate of Formation, business license, trade name and EIN from B2B Solutions in Rochester, WA.",
   ogType = 'website',
 } = Astro.props;
 
 const siteURL = 'https://youragentwa.com';
-const canonicalURL = new URL(Astro.url.pathname, siteURL).href;
+// build.format 'file' makes pathname end in .html (and /index.html); strip it so
+// canonicals match the clean URLs Netlify serves and the sitemap lists.
+const cleanPath = Astro.url.pathname.replace(/(\/index)?\.html$/, '') || '/';
+const canonicalURL = new URL(cleanPath, siteURL).href;
 const ogImageURL = new URL('/og-image.png', siteURL).href; // 1200x630, logo kept inside the center square
-const fullTitle = `${title} | YourAgentWA.com`;
+// Google cuts titles off around 60 characters. Add the site name only when it
+// fits, so the words that earn the click aren't the ones hidden behind "...".
+// (Google shows the site name above the title anyway.)
+const brandedTitle = `${title} | YourAgentWA.com`;
+const fullTitle = fullTitleOverride ?? (brandedTitle.length <= 60 ? brandedTitle : title);
 
 const serviceSchema = {
   '@context': 'https://schema.org',
