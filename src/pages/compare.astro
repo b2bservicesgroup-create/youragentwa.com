@@ -1,0 +1,76 @@
+---
+import SectionPage from '../components/SectionPage.astro';
+import { compareRows } from '../data/site';
+---
+
+<SectionPage
+  slug="compare"
+  title="Washington LLC Formation Cost Compared"
+  seoTitle="$400 WA LLC vs LegalZoom & ZenBusiness: Real Cost Compared"
+  description="Side by side: a basic Washington LLC costs $400 all-in with us, vs $504 with LegalZoom Pro and $454 with ZenBusiness Pro once state fees are added."
+  eyebrow="Compare & save"
+  intro="National services advertise a low starting price, then add the $200 state fee and leave the business license and trade name to you. Here is what a basic Washington LLC really costs."
+>
+  <!-- Compare -->
+  <section id="compare" class="bg-white">
+    <div class="max-w-6xl mx-auto px-6 py-20 md:py-24 flex flex-col gap-10">
+
+      <div class="overflow-x-auto rounded-[18px] border border-[#E3ECF7]">
+        <table class="w-full min-w-[640px] text-left border-collapse">
+          <thead>
+            <tr>
+              <th class="p-5 bg-sky2 font-heading text-navy text-base"></th>
+              <th class="p-5 bg-navy text-white font-heading text-lg">B2B Solutions</th>
+              <th class="p-5 bg-sky2 font-heading text-navy text-lg">LegalZoom Pro</th>
+              <th class="p-5 bg-sky2 font-heading text-navy text-lg">ZenBusiness Pro</th>
+            </tr>
+          </thead>
+          <tbody>
+            {compareRows.map((r) => (
+              <tr class="border-t border-[#E3ECF7]">
+                <td class="p-5 font-semibold text-navy">{r.label}</td>
+                <td class="p-5 bg-[#F0F7FF] font-semibold text-success">{r.b2b}</td>
+                <td class="p-5 text-muted">{r.lz}</td>
+                <td class="p-5 text-muted">{r.zb}</td>
+              </tr>
+            ))}
+            <tr class="border-t-2 border-navy">
+              <td class="p-5 font-heading font-extrabold text-navy text-lg">Starting first-year cost</td>
+              <td class="p-5 bg-[#F0F7FF] font-heading font-extrabold text-navy text-2xl">$400</td>
+              <td class="p-5 font-heading font-bold text-navy text-xl">$449+</td>
+              <td class="p-5 font-heading font-bold text-navy text-xl">$399+</td>
+            </tr>
+            <tr class="border-t border-[#E3ECF7]">
+              <td class="p-5 font-semibold text-navy">Plus business license &amp; trade name you file yourself</td>
+              <td class="p-5 bg-[#F0F7FF] font-semibold text-success">$0</td>
+              <td class="p-5 text-muted">+ $55</td>
+              <td class="p-5 text-muted">+ $55</td>
+            </tr>
+            <tr class="border-t-2 border-navy">
+              <td class="p-5 font-heading font-extrabold text-navy text-lg">Total to be ready to do business</td>
+              <td class="p-5 bg-[#F0F7FF] font-heading font-extrabold text-navy text-2xl">$400</td>
+              <td class="p-5 font-heading font-bold text-navy text-xl">$504</td>
+              <td class="p-5 font-heading font-bold text-navy text-xl">$454</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-2">
+        <div class="bg-sky2 rounded-[18px] p-7 flex flex-col gap-2">
+          <div class="font-heading font-extrabold text-3xl text-accent">Save $104</div>
+          <div class="text-muted">compared to LegalZoom Pro, with the business license and trade name already done for you.</div>
+        </div>
+        <div class="bg-sky2 rounded-[18px] p-7 flex flex-col gap-2">
+          <div class="font-heading font-extrabold text-3xl text-accent">Save $54 the first year</div>
+          <div class="text-muted">compared to ZenBusiness Pro, and $199 every year after, since our price doesn't renew.</div>
+        </div>
+      </div>
+
+      <p class="text-sm text-muted">
+        Competitor prices are based on published Washington LLC rates as of November 2026 and may change. Comparison assumes online filing of the Certificate of Formation ($200), the $50 Washington Business License Application fee and one $5 trade name. LegalZoom and ZenBusiness are trademarks of their respective owners; B2B Solutions is not affiliated with them.
+      </p>
+    </div>
+  </section>
+
+</SectionPage>

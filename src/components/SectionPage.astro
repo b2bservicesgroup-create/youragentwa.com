@@ -1,0 +1,60 @@
+---
+// Shared template for the stand-alone section pages (compare, what's included,
+// how it works, FAQ): page hero, BreadcrumbList schema, closing CTA band.
+import Layout from '../layouts/Layout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import CtaBand from './CtaBand.astro';
+import { startURL } from '../data/site';
+
+interface Props {
+  slug: string;
+  title: string;        // H1 and breadcrumb name
+  seoTitle?: string;    // optional <title> written for search results
+  description: string;  // meta description
+  eyebrow: string;
+  intro: string;
+}
+
+const { slug, title, seoTitle, description, eyebrow, intro } = Astro.props;
+const siteURL = 'https://youragentwa.com';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: siteURL },
+    { '@type': 'ListItem', position: 2, name: title, item: `${siteURL}/${slug}` },
+  ],
+};
+---
+
+<Layout title={title} fullTitle={seoTitle} description={description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <slot name="head" slot="head" />
+  <Header />
+
+  <main>
+    <section class="bg-sky">
+      <div class="max-w-6xl mx-auto px-6 py-16 md:py-20 flex flex-col gap-5">
+        <nav aria-label="Breadcrumb" class="text-sm text-muted">
+          <a href="/" class="text-accent no-underline hover:text-navy">Home</a>
+          <span class="mx-2">/</span>
+          <span>{title}</span>
+        </nav>
+        <div class="text-accent font-bold text-sm tracking-widest uppercase">{eyebrow}</div>
+        <h1 class="font-heading font-extrabold text-[36px] md:text-[52px] leading-[1.08] text-navy tracking-tight max-w-3xl">{title}</h1>
+        <p class="text-xl text-muted max-w-2xl">{intro}</p>
+        <div class="flex flex-wrap gap-3.5">
+          <a href={startURL} class="bg-accent text-white no-underline font-bold px-7 py-4 rounded-full text-lg hover:bg-navy transition-colors">Start your LLC for $400</a>
+        </div>
+      </div>
+    </section>
+
+    <slot />
+
+    <CtaBand />
+  </main>
+
+  <Footer />
+</Layout>

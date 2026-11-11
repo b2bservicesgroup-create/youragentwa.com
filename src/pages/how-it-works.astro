@@ -1,0 +1,32 @@
+---
+import SectionPage from '../components/SectionPage.astro';
+import { steps } from '../data/site';
+---
+
+<SectionPage
+  slug="how-it-works"
+  title="How Washington LLC Formation Works"
+  seoTitle="How Our Washington LLC Formation Works: 4 Simple Steps"
+  description="Form your Washington LLC in four steps: tell us about your business, e-sign, we file with the state and IRS, and you get your documents, license and EIN."
+  eyebrow="How it works"
+  intro="You fill out one short online request. We handle the Secretary of State, the Department of Revenue and the IRS, and send you everything when it's done."
+>
+  <!-- How it works -->
+  <section id="how" class="bg-white">
+    <div class="max-w-6xl mx-auto px-6 py-20 md:py-24 flex flex-col gap-12">
+      <div class="max-w-2xl flex flex-col gap-4">
+        <h2 class="font-heading font-extrabold text-3xl md:text-[44px] leading-tight text-navy">Four simple steps to your Washington LLC</h2>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((step) => (
+          <div class="bg-white rounded-[18px] p-7 flex flex-col gap-2.5">
+            <div class="font-heading font-extrabold text-[44px] text-accent leading-none">{step.num}</div>
+            <h3 class="font-heading text-xl text-navy">{step.title}</h3>
+            <p class="text-muted">{step.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</SectionPage>
